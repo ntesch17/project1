@@ -1,2 +1,3 @@
-# project1
-330 Project 1
+# Nicholas Tesch's Project 1: Phyllotaxis Generator
+IGME Rich Media Web App Dev I: 330.02
+Link: 
