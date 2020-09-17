@@ -1,0 +1,107 @@
+canvas {
+    border: 8px solid #00ccff;;
+    margin: auto;
+    position: absolute; 
+    top: 290px; left: 150px; 
+    
+}
+
+@media (min-width: 1500px) {
+    canvas {
+        border: 8px solid #00ccff;;
+        margin: auto;
+        position: absolute; 
+        top: 290px; left: 240px; 
+        
+    }
+}
+
+@media (min-width: 1700px) {
+    canvas {
+        border: 8px solid #00ccff;;
+        margin: auto;
+        position: absolute; 
+        top: 290px; left: 390px; 
+        
+    }
+}
+
+@media (min-width: 1900px) {
+    canvas {
+        border: 8px solid #00ccff;;
+        margin: auto;
+        position: absolute; 
+        top: 290px; left: 490px; 
+        
+    }
+}
+
+@media (min-width: 2100px) {
+    canvas {
+        border: 8px solid #00ccff;;
+        margin: auto;
+        position: absolute; 
+        top: 290px; left: 590px; 
+        
+    }
+}
+
+
+@media (min-width: 2300px) {
+    canvas {
+        border: 8px solid #00ccff;;
+        margin: auto;
+        position: absolute; 
+        top: 290px; left: 690px; 
+        
+    }
+}
+
+
+html{
+    font-family: 'Patrick Hand', cursive;
+   
+    background-color: #cc00ff;
+    
+}
+
+#title{
+    font-size: 80px;
+    color: #00ccff;
+    text-align: center;
+   
+}
+
+#name{
+    font-size: 40px;
+    text-align: center;
+   
+}
+
+#det{
+    font-size:25px;
+}
+
+.value{
+    font-size: 20px;
+}
+
+.control{
+    text-decoration: underline;
+}
+
+section{
+    display: grid;
+    background-color: #ff00cc;
+    grid-column: 2 span/span 6;
+    grid-row: 2 ;
+    text-align: center;
+   
+}
+
+#wrapper{
+    display: grid;
+    grid-auto-rows: 900px 1fr;
+    grid-auto-columns: 90px 1fr;
+   
+}
