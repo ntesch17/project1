@@ -2,7 +2,7 @@
   "use strict";
   const canvasWidth = 1040, canvasHeight = 780;
 
-  let x = 0, y = 0, a = 0, r = 0;
+  let x = 0, y = 0, a = 0, r = 0, x2 = 0, y2 = 0, a2 = 0, r2 = 0;
 
   let color
   let ctx;
@@ -14,7 +14,6 @@
   let small = false, medium = false, large = false, random=false;
   let createCircle = false, createRectangle = false, createLine = false, createRetangleOutline = false, createCircleOutline = false;
   let fps;
-  let colorOutline;
 
   const drawParams = Object.freeze({
     "zero":0,
@@ -55,6 +54,12 @@
       document.querySelector("#playButton").disabled = false;
       cls(ctx);
     };
+
+    let button = document.querySelector("#btn-download");
+    button.addEventListener('click', function () {
+    var dataURL = canvas.toDataURL('image/png');
+    button.href = dataURL;
+});
 
     document.querySelector("#circlesCB").onchange = function (e) {
       createCircle = e.target.checked;
@@ -110,9 +115,8 @@
       fps = e.target.value;
       let output = document.querySelector("#fpsValue");
       let slider = document.querySelector("#fpsRange");
-      output.innerHTML = slider.value; // Display the default slider value
-
-      // Update the current slider value (each time you drag the slider handle)
+      output.innerHTML = slider.value; 
+      
       slider.oninput = function () {
         output.innerHTML = e.target.value;
       }
@@ -123,38 +127,12 @@
       divergence = e.target.value;
       let divOutput = document.querySelector("#divValue");
       let divSlider = document.querySelector("#divRange");
-      divOutput.innerHTML = divSlider.value; // Display the default slider value
-
-      // Update the current slider value (each time you drag the slider handle)
+      divOutput.innerHTML = divSlider.value; 
+      
       divSlider.oninput = function () {
         divOutput.innerHTML = e.target.value;
       }
     };
-
-    // document.querySelector("#xRange").onchange = function (e) {
-    //   x = e.target.value;
-    //   let xOutput = document.querySelector("#xValue");
-    //   let xSlider = document.querySelector("#xRange");
-    //   xOutput.innerHTML = divSlider.value; // Display the default slider value
-
-    //   // Update the current slider value (each time you drag the slider handle)
-    //   xSlider.oninput = function () {
-    //     xOutput.innerHTML = e.target.value;
-    //   }
-    // };
-
-    // document.querySelector("#yRange").onchange = function (e) {
-    //   a = e.target.value;
-    //   let yOutput = document.querySelector("#yValue");
-    //   let ySlider = document.querySelector("#yRange");
-    //   yOutput.innerHTML = divSlider.value; // Display the default slider value
-
-    //   // Update the current slider value (each time you drag the slider handle)
-    //   ySlider.oninput = function () {
-    //     yOutput.innerHTML = e.target.value;
-    //   }
-    // };
-
 
     document.querySelector("#hslButton").onclick = function () {
       hsl1 = true;
@@ -204,200 +182,137 @@
       linGrad = false;
       radGrad = true;
     }
+    canvas.onclick = canvasClicked;
   }
 
-
   function loop() {
-
     if (paused) return;
-    //if(clear) setTimeout(loop, fps / 2);
+    
     setTimeout(loop, fps / drawParams.two);
     n++;
-    // each frame draw a new dot
-    // `a` is the angle
-    // `r` is the radius from the center (e.g. "Pole") of the flower
-    // `c` is the "padding/spacing" between the dots
-    a = n * dtr(divergence);
+   
+    a = n * nltLIB.dtr(divergence);
     r = c * Math.sqrt(n);
 
-    // now calculate the `x` and `y`
     x = r * Math.cos(a) + canvasWidth / drawParams.two;
     y = r * Math.sin(a) + canvasHeight / drawParams.two;
-    console.log(x);
-    console.log(y);
-    //drawCircle(ctx, x, y, 6, "white");
-    //let color = `rgb(${n % 256},0,255)`;
-    // let aDegrees = (n * divergence) % 256;
-    // let color = `rgb(${aDegrees},0,255)`;
-    //let aDegrees = (n * divergence) % 361;
-    // if(hsl1) let color = `hsl(${aDegrees * 5},100%,50%)`;
+    
     if (hsl1) {
-      color = `hsl(${n / drawParams.five % 361},100%,50%)`;
+      color = nltLIB.hsl1Type(ctx,color, n);
     }
     else if (hsl2) {
-      color = `hsl(${n / getRandomInt(drawParams.two, drawParams.ten) % 361},100%,50%)`;
+      color = nltLIB.hsl2Type(ctx,color,n);
     }
     else if (rgb1) {
-      color = `rgb(${n % 256},80,${getRandomInt(drawParams.zero, 255)})`;
+      color = nltLIB.rgb1Type(ctx,color,n);
     }
     else if (rgb2) {
-      color = `rgb(${n / 30 % 256},${getRandomInt(drawParams.twenty, 150)},${getRandomInt(100, 255)})`;
+      color = nltLIB.rgb2Type(ctx,color,n);
     }
     else if (linGrad) {
-      color = ctx.createLinearGradient(canvasHeight - 280, drawParams.twentyFive, canvasHeight - 380, drawParams.fifty);
-      color.addColorStop(0, getRandomColor());
-      color.addColorStop(1 / 6, getRandomColor());
-      color.addColorStop(2 / 6, getRandomColor());
-      color.addColorStop(3 / 6, getRandomColor());
-      color.addColorStop(4 / 6, getRandomColor());
-      color.addColorStop(5 / 6, getRandomColor());
+      color = nltLIB.linGradType(ctx, color);
     }
     else if (radGrad) {
-      color = ctx.createRadialGradient(drawParams.fifteen, canvasHeight - 630, canvasHeight - 630, canvasHeight - 530, canvasHeight - 530, canvasHeight - 630);
-
-      color.addColorStop(0, getRandomColor());
-      color.addColorStop(1 / 6, getRandomColor());
-      color.addColorStop(2 / 6, getRandomColor());
-      color.addColorStop(3 / 6, getRandomColor());
-      color.addColorStop(4 / 6, getRandomColor());
-      color.addColorStop(5 / 6, getRandomColor());
-      ctx.beginPath;
+      color = nltLIB.radGradType(ctx,color);
     }
 
     if (small) {
-      if (createCircle) drawCircle(ctx, x + drawParams.ten, y + drawParams.twenty,  drawParams.five, color);
-      if (createRectangle) drawRectangle(ctx, x + drawParams.twenty, y + drawParams.twenty,  drawParams.five, drawParams.five, color);
-      if (createRetangleOutline) drawRectangleOutlines(ctx, x, y +  drawParams.ten, color);
-      if (createCircleOutline) drawCircleOutlines(ctx, x + drawParams.twenty, y + drawParams.twenty,  drawParams.five, color);
-      if (createLine) drawLine(ctx, x, y, drawParams.fifty, 0.5, color);
+      if (createCircle) nltLIB.drawCircle(ctx, x + drawParams.ten, y + drawParams.twenty,  drawParams.five, color);
+      if (createRectangle) nltLIB.drawRectangle(ctx, x + drawParams.fifteen, y + drawParams.twenty,  drawParams.five, drawParams.five, color);
+      if (createRetangleOutline) nltLIB.drawRectangleOutlines(ctx, x, y + drawParams.ten, drawParams.ten, drawParams.ten, color);
+      if (createCircleOutline) nltLIB.drawCircleOutlines(ctx, x + drawParams.fifteen, y + drawParams.twenty,  drawParams.five, color);
+      if (createLine) nltLIB.drawLine(ctx, x, y, drawParams.fifty, 0.5, color);
     }
     if (medium) {
-      if (createCircle) drawCircle(ctx, x, y, drawParams.thirtyFive, color);
-      if (createRectangle) drawRectangle(ctx, x, y, drawParams.thirtyFive, drawParams.thirtyFive, color);
-      if (createRetangleOutline) drawRectangleOutlines(ctx, x, y, drawParams.thirtyFive, drawParams.thirtyFive, color);
-      if (createCircleOutline) drawCircleOutlines(ctx, x + drawParams.twenty, y + drawParams.twenty, drawParams.thirtyFive, color);
-      if (createLine) drawLine(ctx, x, y, canvasHeight - 705, 0.7, color);
+      if (createCircle) nltLIB.drawCircle(ctx, x, y, drawParams.thirtyFive, color);
+      if (createRectangle) nltLIB.drawRectangle(ctx, x, y, drawParams.thirtyFive, drawParams.thirtyFive, color);
+      if (createRetangleOutline) nltLIB.drawRectangleOutlines(ctx, x+drawParams.ten, y, drawParams.thirtyFive, drawParams.thirtyFive, color);
+      if (createCircleOutline) nltLIB.drawCircleOutlines(ctx, x + drawParams.twenty, y + drawParams.twenty, drawParams.thirtyFive, color);
+      if (createLine) nltLIB.drawLine(ctx, x-drawParams.ten, y, canvasHeight - 705, 0.7, color);
     }
     if (large) {
-      if (createCircle) drawCircle(ctx, x, y, drawParams.sixty, color);
-      if (createRectangle) drawRectangle(ctx, x, y, drawParams.fifty, drawParams.sixty, color);
-      if (createRetangleOutline) drawRectangleOutlines(ctx, x, y, drawParams.twentyFive, drawParams.sixty, color);
-      if (createCircleOutline) drawCircleOutlines(ctx, x + drawParams.twenty, y + drawParams.twenty, drawParams.sixty, color);
-      if (createLine) drawLine(ctx, x, y, canvasHeight-685, 0.9, color);
+      if (createCircle) nltLIB.drawCircle(ctx, x, y, drawParams.sixty, color);
+      if (createRectangle) nltLIB.drawRectangle(ctx, x, y, drawParams.fifty, drawParams.sixty, color);
+      if (createRetangleOutline) nltLIB.drawRectangleOutlines(ctx, x+drawParams.fifty, y, drawParams.twentyFive, drawParams.sixty, color);
+      if (createCircleOutline) nltLIB.drawCircleOutlines(ctx, x + drawParams.twenty, y + drawParams.twenty, drawParams.sixty, color);
+      if (createLine) nltLIB.drawLine(ctx, x+10, y, canvasHeight-685, 0.9, color);
     }
     if(random){
-      if (createCircle) drawCircle(ctx, x, y, getRandomInt(drawParams.five,drawParams.sixty), color);
-      if (createRectangle) drawRectangle(ctx, x, y, getRandomInt(drawParams.five,drawParams.sixty), getRandomInt(drawParams.five,drawParams.sixty), color);
-      if (createRetangleOutline) drawRectangleOutlines(ctx, x, y, getRandomInt(drawParams.five,drawParams.twentyFive), getRandomInt(drawParams.twentyFive,drawParams.sixty), color);
-      if (createCircleOutline) drawCircleOutlines(ctx, x + drawParams.twenty, y + drawParams.twenty, getRandomInt(drawParams.five,drawParams.sixty), color);
-      if (createLine) drawLine(ctx, x, y, getRandomInt(drawParams.fifty,canvasHeight-685), 0.9, color);
+      if (createCircle) nltLIB.drawCircle(ctx, x, y, nltLIB.getRandomInt(drawParams.five,drawParams.sixty), color);
+      if (createRectangle) nltLIB.drawRectangle(ctx, x, y, nltLIB.getRandomInt(drawParams.five,drawParams.sixty), nltLIB.getRandomInt(drawParams.five,drawParams.sixty), color);
+      if (createRetangleOutline) nltLIB.drawRectangleOutlines(ctx, x, y, nltLIB.getRandomInt(drawParams.five,drawParams.twentyFive), nltLIB.getRandomInt(drawParams.twentyFive,drawParams.sixty), color);
+      if (createCircleOutline) nltLIB.drawCircleOutlines(ctx, x + drawParams.twenty, y + drawParams.twenty, nltLIB.getRandomInt(drawParams.five,drawParams.sixty), color);
+      if (createLine) nltLIB.drawLine(ctx, x, y, nltLIB.getRandomInt(drawParams.fifty,canvasHeight-685), 0.9, color);
     }
   }
+  
+  function canvasClicked(e) {
+     setTimeout(canvasClicked, fps / drawParams.two);
+     n++
+    let rect = e.target.getBoundingClientRect();
+    let mouseX = e.clientX - rect.x;
+    let mouseY = e.clientY - rect.y;
 
-  // helpers
-  function dtr(degrees) {
-    return degrees * (Math.PI / 180);
-  }
-  function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 10)) + min;
-  }
+    a2 = n * nltLIB.dtr(divergence);
+    r2 = c * Math.sqrt(n);
 
-  function getRandomColor() {
-    const getByte = _ => 55 + Math.round(Math.random() * 200);
-    return `rgba(${getByte()},${getByte()},${getByte()},.8)`;
-  }
+    x2 = mouseX + r2 * Math.cos(a2) + canvasWidth / drawParams.two;
+    y2 = mouseY + r2 * Math.sin(a2) + canvasHeight / drawParams.two;
 
-  function cls() {
+    if (hsl1) {
+      color = nltLIB.hsl1Type(ctx,color, n);
+    }
+    else if (hsl2) {
+      color = nltLIB.hsl2Type(ctx,color,n);
+    }
+    else if (rgb1) {
+      color = nltLIB.rgb1Type(ctx,color,n);
+    }
+    else if (rgb2) {
+      color = nltLIB.rgb2Type(ctx,color,n);
+    }
+    else if (linGrad) {
+      color = nltLIB.linGradType(ctx, color);
+    }
+    else if (radGrad) {
+      color = nltLIB.radGradType(ctx,color);
+    }
 
-    x = 0, y = 0, r = 0, a = 0, n = 0;
-    ctx.clearRect(drawParams.zero, drawParams.zero, canvasWidth, canvasHeight);
-    ctx.fillRect(drawParams.zero, drawParams.zero, canvasWidth, canvasHeight);
-
-  }
-
-
-  function drawRectangle(ctx, x, y, width, height, color) {
-    ctx.save();
-    //if(hsl2) color = `hsl(${n / 5 % 361},100%,50%)`;
-
-
-
-    ctx.fillStyle = color;
-
-    ctx.beginPath();
-    ctx.rect(x, y, width, height);
-    ctx.closePath();
-    ctx.fill();
-    // if (lineWidth > 0) {
-    //     ctx.lineWidth = lineWidth;
-    //     ctx.strokeStyle = strokeStyle;
-    //     ctx.stroke();
-    // }
-    //ctx.fillRect(20, 20, 200, 100);
-
-    ctx.restore();
-
-
-  }
-
-  function drawRectangleOutlines(ctx, x, y, x2, y2, color) {
-
-    ctx.save();
-    colorOutline = color;
-    ctx.strokeStyle = colorOutline;
-    // See SG-2 for rest of code
-    ctx.strokeRect(x, y, x2, y2);
-    //ctx.lineTo(x1, y1);
-
-    ctx.restore();
-
-
-
-  }
-
-  function drawCircleOutlines(ctx, x, y, radius, color) {
-
-    ctx.save();
-    // let color = `hsl(${n / 5 % 361},100%,50%)`;
-    colorOutline = color;
-    ctx.strokeStyle = colorOutline;
-    ctx.beginPath();
-    ctx.arc(x, y, radius, drawParams.zero, Math.PI * 2);
-    ctx.closePath();
-    ctx.stroke();
-    ctx.restore();
+    if (small) {
+      if (createCircle) nltLIB.drawCircle(ctx, x2, y2,  drawParams.five, color);
+      if (createRectangle) nltLIB.drawRectangle(ctx, x2, y2,  drawParams.five, drawParams.five, color);
+      if (createRetangleOutline) nltLIB.drawRectangleOutlines(ctx, x2, y2, drawParams.ten, drawParams.ten, color);
+      if (createCircleOutline) nltLIB.drawCircleOutlines(ctx, x2, y2,  drawParams.five, color);
+      if (createLine) nltLIB.drawLine(ctx, x2, y2, drawParams.fifty, 0.5, color);
+    }
+    if (medium) {
+      if (createCircle) nltLIB.drawCircle(ctx, x2, y2, drawParams.thirtyFive, color);
+      if (createRectangle) nltLIB.drawRectangle(ctx, x2, y2, drawParams.thirtyFive, drawParams.thirtyFive, color);
+      if (createRetangleOutline) nltLIB.drawRectangleOutlines(ctx, x2+drawParams.ten, y2, drawParams.thirtyFive, drawParams.thirtyFive, color);
+      if (createCircleOutline) nltLIB.drawCircleOutlines(ctx, x2 + drawParams.twenty, y2 + drawParams.twenty, drawParams.thirtyFive, color);
+      if (createLine) nltLIB.drawLine(ctx, x2-drawParams.ten, y2, canvasHeight - 705, 0.7, color);
+    }
+    if (large) {
+      if (createCircle) nltLIB.drawCircle(ctx, x2, y2, drawParams.sixty, color);
+      if (createRectangle) nltLIB.drawRectangle(ctx, x2, y2, drawParams.fifty, drawParams.sixty, color);
+      if (createRetangleOutline) nltLIB.drawRectangleOutlines(ctx, x2+drawParams.fifty, y2, drawParams.twentyFive, drawParams.sixty, color);
+      if (createCircleOutline) nltLIB.drawCircleOutlines(ctx, x2 + drawParams.twenty, y2 + drawParams.twenty, drawParams.sixty, color);
+      if (createLine) nltLIB.drawLine(ctx, x2+drawParams.ten, y2, canvasHeight-685, 0.9, color);
+    }
+    if(random){
+      if (createCircle) nltLIB.drawCircle(ctx, x2, y2, nltLIB.getRandomInt(drawParams.five,drawParams.sixty), color);
+      if (createRectangle) nltLIB.drawRectangle(ctx, x2, y2, nltLIB.getRandomInt(drawParams.five,drawParams.sixty), nltLIB.getRandomInt(drawParams.five,drawParams.sixty), color);
+      if (createRetangleOutline) nltLIB.drawRectangleOutlines(ctx, x2, y2, nltLIB.getRandomInt(drawParams.five,drawParams.twentyFive), nltLIB.getRandomInt(drawParams.twentyFive,drawParams.sixty), color);
+      if (createCircleOutline) nltLIB.drawCircleOutlines(ctx, x2 + drawParams.twenty, y2 + drawParams.twenty, nltLIB.getRandomInt(drawParams.five,drawParams.sixty), color);
+      if (createLine) nltLIB.drawLine(ctx, x2, y2, nltLIB.getRandomInt(drawParams.fifty,canvasHeight-685), 0.9, color);
+    }
+}
 
 
-
-  }
-
-  function drawCircle(ctx, x, y, radius, color) {
-    ctx.save();
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.arc(x, y, radius, drawParams.zero, Math.PI * 2);
-    ctx.closePath();
-    ctx.fill();
-    ctx.restore();
-  }
-
-  function drawLine(ctx, mX, mY, r, theta, color) {
-    ctx.save();
-    ctx.strokeStyle = color;
-    ctx.beginPath();
-    // const r = 50;
-    // const theta = 0.5;
-    ctx.moveTo(mX, mY);
-    ctx.lineTo(mX + r * Math.cos(theta), mY + r * Math.sin(theta));
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
-    // if (lineWidth > 0) {
-    //   ctx.lineWidth = lineWidth;
-    //   ctx.strokeStyle = strokeStyle;
-    //   ctx.stroke();
-    // }
-    ctx.restore();
-  }
+function cls(ctx) {
+  x = 0, y = 0, r = 0, a = 0, n = 0, x2 = 0, y2 = 0, a2 = 0; r2 = 0;
+  ctx.clearRect(drawParams.zero, drawParams.zero, canvasWidth, canvasHeight);
+  ctx.fillRect(drawParams.zero, drawParams.zero, canvasWidth, canvasHeight);
+}
 
 })();

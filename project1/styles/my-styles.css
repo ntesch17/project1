@@ -1,5 +1,5 @@
 canvas {
-    border: 8px solid #00ccff;;
+    border: 8px solid #00ccff;
     margin: auto;
     position: absolute; 
     top: 290px; left: 150px; 
@@ -8,7 +8,7 @@ canvas {
 
 @media (min-width: 1500px) {
     canvas {
-        border: 8px solid #00ccff;;
+        border: 8px solid #00ccff;
         margin: auto;
         position: absolute; 
         top: 290px; left: 240px; 
@@ -18,7 +18,7 @@ canvas {
 
 @media (min-width: 1700px) {
     canvas {
-        border: 8px solid #00ccff;;
+        border: 8px solid #00ccff;
         margin: auto;
         position: absolute; 
         top: 290px; left: 390px; 
@@ -28,7 +28,7 @@ canvas {
 
 @media (min-width: 1900px) {
     canvas {
-        border: 8px solid #00ccff;;
+        border: 8px solid #00ccff;
         margin: auto;
         position: absolute; 
         top: 290px; left: 490px; 
@@ -38,7 +38,7 @@ canvas {
 
 @media (min-width: 2100px) {
     canvas {
-        border: 8px solid #00ccff;;
+        border: 8px solid #00ccff;
         margin: auto;
         position: absolute; 
         top: 290px; left: 590px; 
@@ -49,7 +49,7 @@ canvas {
 
 @media (min-width: 2300px) {
     canvas {
-        border: 8px solid #00ccff;;
+        border: 8px solid #00ccff;
         margin: auto;
         position: absolute; 
         top: 290px; left: 690px; 
@@ -60,22 +60,21 @@ canvas {
 
 html{
     font-family: 'Patrick Hand', cursive;
-   
-    background-color: #cc00ff;
+    background-image: url('../images/background.jpg');
     
 }
 
 #title{
     font-size: 80px;
-    color: #00ccff;
     text-align: center;
-   
+    text-decoration: underline;
+    background-color: #00ccff;
 }
 
 #name{
     font-size: 40px;
     text-align: center;
-   
+    background-color: #00ccff;
 }
 
 #det{
@@ -83,11 +82,13 @@ html{
 }
 
 .value{
-    font-size: 20px;
+    font-size: 25px;
+    background-color: #00ccff;
 }
 
 .control{
     text-decoration: underline;
+    font-size: 35px;
 }
 
 section{
@@ -96,12 +97,58 @@ section{
     grid-column: 2 span/span 6;
     grid-row: 2 ;
     text-align: center;
-   
+    border: 3px solid #00ccff;
+    font-size: 25px;
+}
+
+#desc{
+    background-color: #00ccff;
+    height:600px;
+    width: 130px;
+    font-size: 25px;
 }
 
 #wrapper{
     display: grid;
     grid-auto-rows: 900px 1fr;
     grid-auto-columns: 90px 1fr;
-   
+}
+
+#click{
+    background-color: #cc00ff;
+    font-size: 25px;
+}
+
+button {
+    background-color: #00ccff;
+    width: 100px;
+    height: 100px;
+} 
+
+button:hover {
+    color: #00ffcc;
+}
+  
+button:active {
+   color: #37fffc;
+}
+
+a:link {
+    background-color: #00ccff;
+    color: black;
+}
+  
+a:hover {
+    color: #00ffcc;
+}
+  
+a:active {
+    color: #37fffc;
+}
+
+#fpsValue{
+    font-size: 25px;
+  }
+#divValue{
+    font-size: 25px;
 }

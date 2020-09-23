@@ -14,80 +14,73 @@
 <body>
 
     <header>
-        <h1 id="title">Phyllotaxis Generator</h1>
+        <h1 id="title">Trippy Generator!</h1>
         <h2 id="name">By Nicholas Tesch</h2>
     </header>
    
 
     <div id="wrapper">
-
+        <main><p id="desc">A themed Phyllotaxis Generator for users to manipulate and create there own designs using the tools below. Set all controls before beginning! Download your design when done!!</p></main>
         <canvas id="canvas"></canvas>
 
         <section>
+            <div class="widget">
             <h1 class="control">Render Controls: </h1>
             <p id="det">Provide a selection to each control type to play!</p>
             <button id="playButton">Play</button> <button id="pauseButton">Pause</button><button
-                id="clearButton">Clear</button>
-
+                id="clearButton">Clear</button><br><br><a href="#" class="button" id="btn-download" download="my-file-name.png">Download Your Design!</a>
+            </div>
         </section>
 
         <section>
+            <div class="widget">
             <h1 class="control">Color Style Select:</h1>
             <button id="hslButton">HSL 1</button> <button id="hsl2Button">HSL 2</button><button id="rgbButton">RGB
                 1</button><button id="rgb2Button">RGB 2</button><button id="linGradButton">Linear
                 Gradient</button><button id="radGradButton">Radical Gradient</button>
+                </div>
         </section>
 
-
         <section>
+            <div class="widget">
             <h1 class="control">Design Select:</h1>
             <span><input type="checkbox" id="rectanglesCB"><label for="rectanglesCB">Create
-                    Rectangles</label><input type="checkbox" id="circlesCB"><label for="circlesCB">Create
-                    Circles</label><input type="checkbox" id="rectangleOutlineCB"><label for="rectangleOutlineCB">Create
-                    Rectangle Outline</label><input type="checkbox" id="circleOutlineCB"><label
+                    Rectangles</label><br><br><input type="checkbox" id="circlesCB"><label for="circlesCB">Create
+                    Circles</label><br><br><input type="checkbox" id="rectangleOutlineCB"><label for="rectangleOutlineCB">Create
+                    Rectangle Outline</label><br><br><input type="checkbox" id="circleOutlineCB"><label
                     for="circleOutlineCB">Create
-                    Circle Outline</label><input type="checkbox" id="lineCB"><label for="lineCB">Create
-                    Lines</label></span>
+                    Circle Outline</label><br><br><input type="checkbox" id="lineCB"><label for="lineCB">Create
+                    Lines</label><br></span>
+                    <p id="click">You can also click the canvas to alter the design! ;P</p>
+                    </div>
         </section>
 
         <section>
+            <div class="widget">
             <h1 class="control">FPS Select:</h1>
-            <span> <input type="range" min="1" max="50" value="1" id="fpsRange">
-            </span>
-            <p class="value">FPS Value:</p><span id="fpsValue"></span>
-            <!-- <h1 class="control">X Value Select (Optional):</h1>
-            <span> <input type="range" min="517" max="1000" value="517" id="xRange">
-                <p class="value">X Value: <span id="xValue"></span></p>
-            </span> -->
-
+             <input type="range" min="1" max="50" value="1" id="fpsRange">
+            <p class="value">FPS Value:</p><span id="fpsValue"></span></div>
         </section>
 
         <section>
+            <div class="widget">
             <h1 class="control">Divergence Select:</h1>
-            <span> <input type="range" min="-200" max="200" value="-137.5" id="divRange">
-            </span>
-            <p class="value">Divergence Value: </p><span id="divValue"></span>
-
-            <!-- <h1 class="control">Y Value Select (Optional):</h1>
-            <span> <input type="range" min="391" max="800" value="820" id="yRange">
-                <p class="value">Y Value: <span id="yValue"></span></p>
-            </span> -->
-
-
+            <input type="range" min="-200" max="200" value="-137.5" id="divRange">
+            <p class="value">Divergence Value: </p><span id="divValue"></span></div>
         </section>
 
-
-
         <section>
+            <div class="widget">
             <h1 class="control">Pedal Size Select:</h1>
             <input type="radio" id="small" name="size" value="small">
-            <label for="small">Small</label><br>
+            <label for="small">Small</label><br><br>
             <input type="radio" id="medium" name="size" value="medium">
-            <label for="medium">Medium</label><br>
+            <label for="medium">Medium</label><br><br>
             <input type="radio" id="large" name="size" value="large">
-            <label for="large">Large</label>
+            <label for="large">Large</label><br><br>
             <input type="radio" id="random" name="size" value="random">
             <label for="random">Random</label>
+                </div>
         </section>
     </div>
 </body>
