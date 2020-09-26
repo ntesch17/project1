@@ -1,16 +1,17 @@
-
-(function () {
+(function() {
+    "use strict";
+    //Global Variables
     const canvasHeight = 780;
     const drawParams = Object.freeze({
-        "zero":0,
-        "twenty":20,
-        "ten":10,
-        "fifty":50,
-        "twentyFive":25,
-        "fifteen":15,
-        "two":2,
+        "zero": 0,
+        "twenty": 20,
+        "ten": 10,
+        "fifty": 50,
+        "twentyFive": 25,
+        "fifteen": 15,
+        "two": 2,
     });
-    
+
     let nltLIB = {
         // helpers
         dtr(degrees) {
@@ -25,22 +26,23 @@
             return `rgba(${getByte()},${getByte()},${getByte()},.8)`;
         },
 
-        hsl1Type(ctx,color, n) {
+        //Color type changer
+        hsl1Type(ctx, color, n) {
             ctx.globalAlpha = 1;
             return color = `hsl(${n / 5 % 361},100%,50%)`;
         },
 
-        hsl2Type(ctx,color, n) {
+        hsl2Type(ctx, color, n) {
             ctx.globalAlpha = 1;
             return color = `hsl(${n / nltLIB.getRandomInt(drawParams.two, drawParams.ten) % 361},100%,50%)`;
         },
 
-        rgb1Type(ctx,color, n) {
+        rgb1Type(ctx, color, n) {
             ctx.globalAlpha = 1;
             return color = `rgb(${n % 256},80,${nltLIB.getRandomInt(drawParams.zero, 255)})`;
         },
 
-        rgb2Type(ctx,color, n) {
+        rgb2Type(ctx, color, n) {
             ctx.globalAlpha = 1;
             return color = `rgb(${n / 30 % 256},${nltLIB.getRandomInt(drawParams.twenty, 150)},${nltLIB.getRandomInt(100, 255)})`;
         },
@@ -65,10 +67,11 @@
             color.addColorStop(3 / 6, nltLIB.getRandomColor());
             color.addColorStop(4 / 6, nltLIB.getRandomColor());
             color.addColorStop(5 / 6, nltLIB.getRandomColor());
-            ctx.globalAlpha = nltLIB.getRandomInt(0.2,0.5);
+            ctx.globalAlpha = nltLIB.getRandomInt(0.4, 0.7);
             return color;
         },
 
+        //Drawing type changer
         drawRectangle(ctx, x, y, width, height, color) {
             ctx.save();
             ctx.fillStyle = color;
@@ -120,10 +123,11 @@
             ctx.restore();
         }
     };
+
+    //Checks if window is open and then it does this
     if (window) {
         window["nltLIB"] = nltLIB;
-    }
-    else {
+    } else {
         throw "'Window is not Defined!'";
     }
 

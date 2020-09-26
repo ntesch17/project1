@@ -1,18 +1,26 @@
 canvas {
     border: 8px solid #00ccff;
     margin: auto;
-    position: absolute; 
-    top: 290px; left: 150px; 
-    
+    position: absolute;
+    top: 290px;
+    left: 150px;
+}
+
+#desc {
+    background-color: #00ccff;
+    height: 710px;
+    width: 130px;
+    font-size: 25px;
+    margin: auto;
 }
 
 @media (min-width: 1500px) {
     canvas {
         border: 8px solid #00ccff;
         margin: auto;
-        position: absolute; 
-        top: 290px; left: 240px; 
-        
+        position: absolute;
+        top: 290px;
+        left: 240px;
     }
 }
 
@@ -20,9 +28,9 @@ canvas {
     canvas {
         border: 8px solid #00ccff;
         margin: auto;
-        position: absolute; 
-        top: 290px; left: 390px; 
-        
+        position: absolute;
+        top: 290px;
+        left: 390px;
     }
 }
 
@@ -30,9 +38,9 @@ canvas {
     canvas {
         border: 8px solid #00ccff;
         margin: auto;
-        position: absolute; 
-        top: 290px; left: 490px; 
-        
+        position: absolute;
+        top: 290px;
+        left: 490px;
     }
 }
 
@@ -40,81 +48,76 @@ canvas {
     canvas {
         border: 8px solid #00ccff;
         margin: auto;
-        position: absolute; 
-        top: 290px; left: 590px; 
-        
+        position: absolute;
+        top: 290px;
+        left: 590px;
     }
 }
-
 
 @media (min-width: 2300px) {
     canvas {
         border: 8px solid #00ccff;
         margin: auto;
-        position: absolute; 
-        top: 290px; left: 690px; 
-        
+        position: absolute;
+        top: 290px;
+        left: 690px;
+    }
+    #desc {
+        background-color: #00ccff;
+        left: 2040px;
+        font-size: 25px;
     }
 }
 
-
-html{
+html {
     font-family: 'Patrick Hand', cursive;
     background-image: url('../images/background.jpg');
-    
 }
 
-#title{
+#title {
     font-size: 80px;
     text-align: center;
     text-decoration: underline;
     background-color: #00ccff;
 }
 
-#name{
+#name {
     font-size: 40px;
     text-align: center;
     background-color: #00ccff;
 }
 
-#det{
-    font-size:25px;
+#det {
+    font-size: 25px;
 }
 
-.value{
+.value {
     font-size: 25px;
     background-color: #00ccff;
 }
 
-.control{
+.control {
     text-decoration: underline;
     font-size: 35px;
 }
 
-section{
+section {
     display: grid;
     background-color: #ff00cc;
     grid-column: 2 span/span 6;
-    grid-row: 2 ;
+    grid-row: 2;
     text-align: center;
     border: 3px solid #00ccff;
     font-size: 25px;
 }
 
-#desc{
-    background-color: #00ccff;
-    height:600px;
-    width: 130px;
-    font-size: 25px;
-}
-
-#wrapper{
+#wrapper {
     display: grid;
     grid-auto-rows: 900px 1fr;
     grid-auto-columns: 90px 1fr;
 }
 
-#click{
+#click {
     background-color: #cc00ff;
     font-size: 25px;
 }
@@ -123,32 +126,33 @@ button {
     background-color: #00ccff;
     width: 100px;
     height: 100px;
-} 
+}
 
 button:hover {
     color: #00ffcc;
 }
-  
+
 button:active {
-   color: #37fffc;
+    color: #37fffc;
 }
 
 a:link {
     background-color: #00ccff;
     color: black;
 }
-  
+
 a:hover {
     color: #00ffcc;
 }
-  
+
 a:active {
     color: #37fffc;
 }
 
-#fpsValue{
+#fpsValue {
     font-size: 25px;
-  }
-#divValue{
+}
+
+#divValue {
     font-size: 25px;
 }
