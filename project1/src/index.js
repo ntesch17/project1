@@ -40,6 +40,7 @@
         createRetangleOutline = false,
         createCircleOutline = false;
     let fps;
+    let rect, mouseX, mouseY;
 
     const drawParams = Object.freeze({
         "zero": 0,
@@ -261,7 +262,13 @@
                 pre4 = true;
             }
             //Handles mouse click events
-        canvas.onclick = canvasClicked;
+        canvas.onclick = function(e) {
+            rect = e.target.getBoundingClientRect();
+            mouseX = e.clientX - rect.x;
+            mouseY = e.clientY - rect.y;
+
+            canvasClicked();
+        }
     }
 
     //Loop to create phyllotaxis and sets user controls to edit design (color, shape, size, fps)
@@ -333,20 +340,15 @@
     }
 
     //Handles mouse click events to further edit the design
-    function canvasClicked(e) {
+    function canvasClicked() {
         setTimeout(canvasClicked, fps / drawParams.two);
         n++
-        let rect = e.target.getBoundingClientRect();
-        let mouseX = e.clientX - rect.x;
-        let mouseY = e.clientY - rect.y;
 
         a = n * nltLIB.dtr(divergence);
         r = c * Math.sqrt(n);
 
         x = mouseX + r * Math.cos(a) + canvasWidth / drawParams.two;
         y = mouseY + r * Math.sin(a) + canvasHeight / drawParams.two;
-
-        loop(x, y)
     }
 
     //Clears canavas and resets all values
