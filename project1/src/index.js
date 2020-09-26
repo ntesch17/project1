@@ -270,11 +270,11 @@
 
         setTimeout(loop, fps / drawParams.two);
         n++;
-
-        if (div == false || pre1 == true) divergence = drawParams.Div1;;
-        if (pre2) divergence = drawParams.Div2;
-        if (pre3) divergence = drawParams.Div3;
-        if (pre4) divergence = drawParams.Div4;
+        if (div == false) divergence = drawParams.Div1;
+        if (div == false && pre1 == true) divergence = drawParams.Div1;
+        if (div == false && pre2) divergence = drawParams.Div2;
+        if (div == false && pre3) divergence = drawParams.Div3;
+        if (div == false && pre4) divergence = drawParams.Div4;
         if (fp == false) fps = drawParams.fifty;
         if (col == false) {
             color = `hsl(${n / 5 % 361},100%,50%)`;
